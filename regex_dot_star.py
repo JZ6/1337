@@ -1,14 +1,8 @@
 class Solution(object):
     def isMatch(self, text, pattern):
-        
-        cache = {}
-        
+    
         def match_rec(ti, pi):
             
-            cache_key = (ti, pi)
-            if cache_key in cache:
-                return cache[cache_key]
-
             if pi >= len(pattern):
                 return ti >= len(text) 
 
@@ -28,6 +22,7 @@ class Solution(object):
             return is_next_wild_card(pi) and skip_wild_card(ti, pi)
         
         
+        cache = {}
         def check_cached(ti, pi):
             
             cache_key = (ti, pi)
@@ -53,7 +48,10 @@ class Solution(object):
         def check_next_wild_card(ti, pi):
             return check_cached(ti+1, pi)
         
-       
 
         return match_rec(0, 0)
     
+
+def unpack(d, *args):
+    return [d[arg] for arg in args]
+        
